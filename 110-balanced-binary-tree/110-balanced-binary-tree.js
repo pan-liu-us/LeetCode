@@ -16,8 +16,8 @@ var isBalanced = function(root) {
         return true;
     }
     if (isBalanced(root.left) && isBalanced(root.right)) {
-        let left = root.left == null ? 1 : root.left.val;
-        let right = root.right == null ? 1 : root.right.val;
+        let left = root.left === null ? 1 : root.left.val;
+        let right = root.right === null ? 1 : root.right.val;
         root.val = Math.max(left, right) + 1;
         return Math.abs(left - right) <= 1;
     }
