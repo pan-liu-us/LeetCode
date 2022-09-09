@@ -1,4 +1,6 @@
 # Approach 2: HashMap 
+# Time complexity: O(n)
+# Space complexity: O(n)
 
 import collections
 
