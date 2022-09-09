@@ -1,12 +1,12 @@
-# Approach 2: HashMap 
-# Time complexity: O(n)
-# Space complexity: O(n)
+# Approach 3: Sorting
+# Time complexity: O(nlogn)
+# Space complexity: O(1) or O(n)
 
 import collections
 
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        counts = collections.Counter(nums)
-        return max(counts, key=counts.get) # the key whose value is the largest
+        nums.sort()
+        return nums[len(nums)//2]
         
         
