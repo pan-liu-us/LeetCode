@@ -1,12 +1,19 @@
-# Approach 3: Sorting
-# Time complexity: O(nlogn)
-# Space complexity: O(1) or O(n)
-
-import collections
+# Approach 3: Hashmap no module
+# Time complexity: O(n)
+# Space complexity: O(n)
 
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        nums.sort()
-        return nums[len(nums)//2]
+        count = {}
+        res, maxCount = 0, 0
+        
+        for n in nums:
+            count[n] = 1 + count.get(n, 0)
+            res = n if count[n] > maxCount else res
+            maxCount = max(maxCount, count[n])
+        return res
+            
+        
+        
         
         
