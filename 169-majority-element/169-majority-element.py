@@ -1,18 +1,19 @@
-# Approach 3: Hashmap no module
-# Time complexity: O(n)
-# Space complexity: O(n)
+# Approach 4: Boyer-Moore Voting Algorithm
+# Time complexity: O(n) iterate over nums once, runs in linear time
+# Space complexity: O(1) constant additional memory
 
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        count = {}
-        res, maxCount = 0, 0
+        count,candidate = 0, None
+        
         
         for n in nums:
-            count[n] = 1 + count.get(n, 0)
-            res = n if count[n] > maxCount else res
-            maxCount = max(maxCount, count[n])
-        return res
-            
+            if count == 0:
+                candidate = n
+            count += (1 if n == candidate else -1)
+        
+        return candidate
+                
         
         
         
