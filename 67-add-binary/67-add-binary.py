@@ -1,13 +1,32 @@
-# Approach 1: Built-in Functions
+# Approach 2: Bit-by-Bit Computation
 
-# Use "{:b}" for converting the argument to a binary form
-# "{1} is the second argument. {0} is the first".format('yellow', 3)
-# Out: '3 is the second argument. yellow is the first'
-# So "{0:b}" is convert the first argument to binary format.
-
-# Time complexity: O((N + M)
+# Time complexity: O(max(N,M)), where N and M are lengths of the input strings a and b.
+# Space complexity:O(max(N,M)) to keep the answer.
 
 class Solution:
-    def addBinary(self, a: str, b: str) -> str:
-        return '{0:b}'.format(int(a,2) + int(b,2))
+    def addBinary(self, a, b) -> str:
+		    n = max(len(a), len(b))
+		    a, b = a.zfill(n), b.zfill(n)
+		    
+		    carry = 0
+		    answer = []
+		    for i in range(n - 1, -1, -1):
+		        if a[i] == '1':
+		            carry += 1
+		        if b[i] == '1':
+		            carry += 1
+		
+		        if carry % 2 == 1:
+		            answer.append('1')
+		        else:
+		            answer.append('0')
+		
+		        carry //= 2
+		
+		    if carry == 1:
+		        answer.append('1')
+		    answer.reverse()
+		
+		    return ''.join(answer)
+
         
