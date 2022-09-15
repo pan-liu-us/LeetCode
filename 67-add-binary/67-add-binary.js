@@ -1,32 +1,34 @@
-# Approach 2: Bit-by-Bit Computation
+/**
+ * @param {string} a
+ * @param {string} b
+ * @return {string}
+ */
+var addBinary = function(a, b) {
+    let n = Math.max(a.length, b.length);
+    a = a.padStart(n, "0"); 
+    b = b.padStart(n, "0");
+    let carry = 0;
+    let res =[];
+    
+    for (let i = n - 1; i >= 0; i--) {
+        if (a[i] === "1") {
+            carry++;
+        }
+        if (b[i] === "1") {
+            carry++;
+        } 
+        if (carry % 2 === 1) {
+            res.push("1");
+        } else {
+            res.push("0");
+        }
+        carry = Math.floor(carry / 2);
+       
+    }
+     
+    if (carry === 1) {
+        res.push("1");
+    }
 
-# Time complexity: O(max(N,M)), where N and M are lengths of the input strings a and b.
-# Space complexity:O(max(N,M)) to keep the answer.
-
-class Solution:
-    def addBinary(self, a, b) -> str:
-		    n = max(len(a), len(b))
-		    a, b = a.zfill(n), b.zfill(n)
-		    
-		    carry = 0
-		    answer = []
-		    for i in range(n - 1, -1, -1):
-		        if a[i] == '1':
-		            carry += 1
-		        if b[i] == '1':
-		            carry += 1
-		
-		        if carry % 2 == 1:
-		            answer.append('1')
-		        else:
-		            answer.append('0')
-		
-		        carry //= 2
-		
-		    if carry == 1:
-		        answer.append('1')
-		    answer.reverse()
-		
-		    return ''.join(answer)
-
-        
+    return res.reverse().join("");
+};
