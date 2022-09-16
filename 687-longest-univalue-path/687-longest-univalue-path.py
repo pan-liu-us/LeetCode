@@ -1,3 +1,12 @@
+# Approach: Recursion
+
+# Time Complexity: O(N)
+# N is the number of nodes in the tree. We process every node once.
+
+# Space Complexity: O(H)
+# H is the height of the tree. Our recursive call stack could be up to H layers deep.
+
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
