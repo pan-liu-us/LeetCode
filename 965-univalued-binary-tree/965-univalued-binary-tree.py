@@ -1,6 +1,6 @@
-# Approach 1: Depth-First Search
+# Approach 1: Depth-First Search (use set)
 
-# Output all the values of the array. After, we can check that they are all equal or not.
+# Add all the values into a seen set. After, we can check the length of the set.
 
 # Time Complexity: O(N) 
 # N is the number of nodes in the given tree.
@@ -15,16 +15,16 @@
 #         self.right = right
 class Solution:
     def isUnivalTree(self, root: Optional[TreeNode]) -> bool:
-        vals = []
+        seen = set()
         
         def dfs(node):
             if not node:
                 return True
             if node:
-                vals.append(node.val)
+                seen.add(node.val)
                 dfs(node.left)
                 dfs(node.right)
         
         dfs(root)
-        return len(set(vals)) == 1
+        return len(seen) == 1
         
