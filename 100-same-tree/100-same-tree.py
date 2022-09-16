@@ -1,5 +1,7 @@
 # Approach 1: Recursion
 
+#  Check if p and q nodes are not None, and their values are equal. If all checks are OK, do the same for the child nodes recursively.
+
 # Time complexity: O(N)
 # N is a number of nodes in the tree, since one visits each node exactly once.
 
