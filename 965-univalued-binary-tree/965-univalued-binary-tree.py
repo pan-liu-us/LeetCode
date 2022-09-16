@@ -1,11 +1,12 @@
-# Approach 1: Depth-First Search (use set)
+# Approach 2: Recursion
 
-# Add all the values into a seen set. After, we can check the length of the set.
+# A tree is univalued if both its children are univalued, plus the root node has the same value as the child nodes
 
 # Time Complexity: O(N) 
 # N is the number of nodes in the given tree.
 
-# Space Complexity: O(N)
+# Space Complexity: O(H)
+# H is the height of the given tree.
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -15,16 +16,7 @@
 #         self.right = right
 class Solution:
     def isUnivalTree(self, root: Optional[TreeNode]) -> bool:
-        seen = set()
-        
-        def dfs(node):
-            if not node:
-                return True
-            if node:
-                seen.add(node.val)
-                dfs(node.left)
-                dfs(node.right)
-        
-        dfs(root)
-        return len(seen) == 1
+        left_correct = not root.left or (root.val == root.left.val and self.isUnivalTree(root.left))
+        right_correct = not root.right or (root.val == root.right.val and self.isUnivalTree(root.right))
+        return left_correct and  right_correct
         
