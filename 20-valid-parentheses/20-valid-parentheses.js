@@ -16,18 +16,17 @@ var isValid = function(s) {
     }
     
     let stack = [];
-    let mapping = {")": "(", "}": "{", "]": "["}
-    
-    for (let c of s) {
-        if (stack.length && c in mapping) {
-            if (stack[stack.length - 1] === mapping[c]) {
-                stack.pop();
-            } else {
-                return false;
-            }
+    for (var c of s) {
+        if (c === ')' && stack[stack.length -1] === '('){
+            stack.pop();
+        } else if (c === '}' && stack[stack.length -1] === '{'){
+            stack.pop();
+        } else if (c === ']' && stack[stack.length -1] === '['){
+            stack.pop();
         } else {
             stack.push(c);
-        } 
+        }    
     }
+    
     return stack.length === 0;
 };
