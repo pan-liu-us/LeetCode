@@ -8,6 +8,10 @@
 
 class Solution:
     def isValid(self, s: str) -> bool:
+        
+        if len(s) % 2 != 0:
+            return False
+
         dic = {')':'(',']':'[','}':'{'}
         stack = []
         for i in s:
