@@ -16,13 +16,14 @@ class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if root != None:
             
-            # invert child trees
-            inverted_right = self.invertTree(root.right)
-            inverted_left = self.invertTree(root.left)
-            
             # swap children
-            root.left = inverted_right
-            root.right = inverted_left
-            
+            temp = root.left
+            root.left = root.right
+            root.right = temp
+          
+            # invert child trees
+            self.invertTree(root.right)
+            self.invertTree(root.left)
+           
         return root
         
