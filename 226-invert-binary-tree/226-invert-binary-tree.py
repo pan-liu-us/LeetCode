@@ -1,10 +1,12 @@
-# Approach 2: Iterative
+# Approach 1: Recursive DFS
 
 # T.C. = O(n)
-# n is the number of nodes in the tree, each node in the tree is visited / added to the queue only once
+# n is the number of nodes in the tree, each node is visited once
 
-# S.C. = O(n)
-# size of queue, worst case for a full binary tree, the leaf level has n/2 leaves
+# S.C. = O(h) => O(n)
+# 使用的空间由递归栈的深度决定，它等于当前节点在二叉树中的高度
+# 在平均情况下，二叉树的高度与节点个数为对数关系，即 O(logN)。而在最坏情况下，树形成链状，空间复杂度为 O(N)
+# h is the height of the tree, because of recursion, O(h) function calls will be placed on the stack in the worst case
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -17,21 +19,5 @@ class Solution:
         if not root:
             return root
         
-        # store nodes whose left and right child have not been swapped yet
-        q = collections.deque([root])
-        
-        while q:
-            cur = q.popleft()   
-            cur.left, cur.right = cur.right, cur.left
-            if cur.left:
-                q.append(cur.left)
-            if cur.right:
-                q.append(cur.right)
+        root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)  
         return root
-                
-            
-            
-        
-        
-        
-        
