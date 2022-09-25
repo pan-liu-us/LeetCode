@@ -1,10 +1,10 @@
-# Approach 1: Recursive DFS
+# Approach 2: Iterative
 
 # T.C. = O(n)
-# n is the number of nodes in the tree, each node is visited once
+# n is the number of nodes in the tree, each node in the tree is visited / added to the queue only once
 
-# S.C. = O(h) => O(n)
-# h is the height of the tree, because of recursion, O(h) function calls will be placed on the stack in the worst case
+# S.C. = O(n)
+# size of queue, worst case for a full binary tree, the leaf level has n/2 leaves
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -14,16 +14,24 @@
 #         self.right = right
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        if root != None:
-            
-            # swap children
-            temp = root.left
-            root.left = root.right
-            root.right = temp
-          
-            # invert child trees
-            self.invertTree(root.right)
-            self.invertTree(root.left)
-           
+        if not root:
+            return root
+        
+        # store nodes whose left and right child have not been swapped yet
+        q = collections.deque([root])
+        
+        while q:
+            cur = q.popleft()   
+            cur.left, cur.right = cur.right, cur.left
+            if cur.left:
+                q.append(cur.left)
+            if cur.right:
+                q.append(cur.right)
         return root
+                
+            
+            
+        
+        
+        
         
