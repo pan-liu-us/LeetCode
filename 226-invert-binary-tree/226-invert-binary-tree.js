@@ -22,17 +22,14 @@ var invertTree = function(root) {
     if (root === null) {
         return null;
     }
-    
-    if (root !== null) {
-        
-        // swap children
-        let temp = root.right;
-        root.right = root.left;
-        root.left = temp;
-        
-        // invert child trees
-        invertTree(root.right);
-        invertTree(root.left);
-    }
+    // swap children
+    let temp = root.right;
+    root.right = root.left;
+    root.left = temp;
+
+    // invert child trees
+    invertTree(root.right);
+    invertTree(root.left);
+
     return root;
 };
