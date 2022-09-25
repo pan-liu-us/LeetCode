@@ -19,6 +19,10 @@
  * @return {TreeNode}
  */
 var invertTree = function(root) {
+    if (root === null) {
+        return null;
+    }
+    
     if (root !== null) {
         
         // swap children
