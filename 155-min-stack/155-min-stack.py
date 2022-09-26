@@ -7,21 +7,19 @@ class MinStack:
 
     def __init__(self):
         self.stack = []
-        self.min_tracker = []
+        self.min_tracker = [math.inf] 
         
 
     def push(self, val: int) -> None:
         self.stack.append(val)
-        if not self.min_tracker or val <= self.min_tracker[-1]:
-            self.min_tracker.append(val)
+        self.min_tracker.append(min(val, self.min_tracker[-1]))
         
 
     def pop(self) -> None:
-        if self.min_tracker[-1] == self.stack[-1]:
-            self.min_tracker.pop()
         self.stack.pop()
-        
+        self.min_tracker.pop()
 
+        
     def top(self) -> int:
         return self.stack[-1]
         
