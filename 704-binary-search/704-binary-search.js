@@ -1,4 +1,4 @@
-// T.C. = O(logN) for how many times N(length of nums) can be indived by 2
+// T.C. = O(logN) for how many times N(length of nums) can be divided by 2
 // S.C. = O(1)
 
 /**
