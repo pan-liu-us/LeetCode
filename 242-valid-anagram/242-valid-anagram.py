@@ -1,12 +1,23 @@
-# Approach 1: Sorting
+# Approach 2: Frequency Counter List Size 26
 
-# Time complexity: O(nlogn) 
-# because sorting costs O(nlogn) time and comparing costs O(n) time
+# Time complexity: O(n) 
+# accessing the counter list is a constant time operation
 
 # Space complexity: O(1)
-# it depends on the sorting implementation
+# the list's size stays constant no matter how large n is.
 
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        return sorted(s) == sorted(t) 
+        if len(s) != len(t):
+            return False
+        
+        counter_list = [0] * 26
+        for ch in s:
+            counter_list[ord(ch) - ord('a')] += 1
+        for ch in t:
+            counter_list[ord(ch) - ord('a')] -= 1
+            if counter_list[ord(ch) - ord('a')] < 0:
+                return False
+            
+        return True
         
