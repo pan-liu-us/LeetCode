@@ -1,4 +1,4 @@
-# Approach 2: Build-in Counter
+# Approach: Build-in Counter
 
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
