@@ -1,8 +1,10 @@
-# DFS
+# BFS
 # T.C. = O(N)
 # Where N is the number of pixels in the image. For the worst case, we need to process every pixel.
 # S.C. = O(N)
-# Where N is the size of the implicit call stack when calling dfs.
+# Since the worst case, O(N) extra space is required by the queue.
+
+from collections import deque
 
 class Solution:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
@@ -12,16 +14,17 @@ class Solution:
         originalColor = image[sr][sc]
         if originalColor == color:
             return image
+
+        q = collections.deque()
+        q.append((sr, sc))
         
-        def dfs(r: int, c: int):
-            if r < 0 or c < 0 or r > h or c > w or image[r][c] != originalColor:
-                return
+        while q:
+            (r, c) = q.popleft()
             image[r][c] = color
-            if r - 1 >= 0: dfs(r - 1, c)
-            if r + 1 < h: dfs(r + 1, c)
-            if c - 1 >= 0: dfs(r, c - 1)
-            if c + 1 < w: dfs(r, c + 1)
-        
-        dfs(sr, sc)
+
+            for i, j in ((r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)):
+
+                if 0 <= i < h and 0 <= j < w and image[i][j] == originalColor:
+                    q.append((i, j))
+
         return image
-        
