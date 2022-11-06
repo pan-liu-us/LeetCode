@@ -1,16 +1,15 @@
-# Brute Force
-# Time complexity: O(N + NlogN) 
-# count the frequency of each word in O(N),use sorting O(NlogN)
+# MaxHeap
+
+# Time complexity: O(klogN)
+# count the frequency of each word in O(N)
+# heapify the list of unique words in O(N) time
+# each time we pop the top from the heap, it costs O(logN) time as the size of the heap is O(N)
 # Space complexity: O(N) 
-# store frequencies in a HashMap and return a slice from a sorted list
+ 
+from collections import Counter
+from heapq import nsmallest
 
 class Solution:
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
-
         cnt = Counter(words)
-        
-        # define a sort key
-        def sort_key(x):
-            return (-cnt[x], x) # first sort by frequcy, then sort by the word itself
-
-        return sorted(list(cnt.keys()), key=sort_key)[:k] # key=lambda x: (-cnt[x], x)
+        return nsmallest(k, cnt.keys(), key=lambda x: (-cnt[x], x))
