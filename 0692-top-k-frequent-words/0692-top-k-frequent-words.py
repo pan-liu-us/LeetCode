@@ -1,15 +1,45 @@
-# MaxHeap
+# Bucket Sorting + Trie
 
-# Time complexity: O(klogN)
-# count the frequency of each word in O(N)
-# heapify the list of unique words in O(N) time
-# each time we pop the top from the heap, it costs O(logN) time as the size of the heap is O(N)
-# Space complexity: O(N) 
- 
+# Time complexity: O(N)
+# Space complexity: O(N)
+
 from collections import Counter
-from heapq import nsmallest
 
 class Solution:
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
+        n = len(words)
         cnt = Counter(words)
-        return nsmallest(k, cnt.keys(), key=lambda x: (-cnt[x], x))
+        bucket = [{} for _ in range(n+1)]
+        self.k = k
+
+        def add_word(trie: Mapping, word: str) -> None:
+            root = trie
+            for c in word:
+                if c not in root:
+                    root[c] = {}
+                root = root[c]
+            root['#'] = {}
+
+        def get_words(trie: Mapping, prefix: str) -> List[str]:
+            if self.k == 0:
+                return []
+            res = []
+            if '#' in trie:
+                self.k -= 1
+                res.append(prefix)
+            for i in range(26):
+                c = chr(ord('a') + i)
+                if c in trie:
+                    res += get_words(trie[c], prefix+c)
+            return res
+
+        for word, freq in cnt.items():
+            add_word(bucket[freq], word)
+
+        res = []
+        for i in range(n, 0, -1):
+            if self.k == 0:
+                return res
+            if bucket[i]:
+                res += get_words(bucket[i], '')
+        return res
