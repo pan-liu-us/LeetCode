@@ -5,7 +5,7 @@ BEGIN
   
 	SELECT GROUP_CONCAT(
 		DISTINCT CONCAT(
-			'SUM(IF(store = "', store, '", price, null)) AS ', store
+			'SUM(IF(store = "', store, '", price, NULL)) AS ', store
 		)
 	)
 	INTO @sql
